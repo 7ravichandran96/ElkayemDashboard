@@ -183,31 +183,35 @@
 </head>
 <body>
   <nav class="sidebar" id="sidebar" aria-label="Sidebar navigation">
-  <a href="#" data-src="https://1drv.ms/x/c/4ab693cd2bf36664/IQRZXULmE5ScR6-Lek4lgacfAQ0FsqXqsOgO2Z-4D_7FTHs?em=2&AllowTyping=True&ActiveCell='SUM(V)'!F24&wdInConfigurator=True&wdInConfigurator=True" data-label="Projection PES" tabindex="0">
-    <i class="fa-solid fa-bullseye"></i><span>Projection PES</span>
-  </a>
+    <!-- NEW: added Six Years as first report, then the existing items preserved -->
+    <a href="#" data-src="https://1drv.ms/x/c/468679d4cdf834af/IQSHQFNEM76RSJt5roeidwZSAez-JfcLOSYkObbqxJz6a30?em=2&AllowTyping=True&ActiveCell='TVSM'!E6&wdInConfigurator=True&wdInConfigurator=True" data-label="Six Years" tabindex="0">
+      <i class="fa-solid fa-calendar-alt"></i><span>Six Years</span>
+    </a>
 
-  <a href="#" data-src="https://1drv.ms/x/c/4ab693cd2bf36664/IQQPanuavVGLT7XfDwEB7mzuAZ0ssOfkJHGPvPCT4XSd0HY?em=2&AllowTyping=True&ActiveCell='Print%20Sum'!E7&wdInConfigurator=True&wdInConfigurator=True" data-label="Plan vs Actual" tabindex="0">
-    <i class="fa-solid fa-chart-line"></i><span>Plan vs Actual</span>
-  </a>
+    <a href="#" data-src="https://1drv.ms/x/c/468679d4cdf834af/IQSj1cz9g9LdSbu_qaNij1KfAZuLCl_lO6C_5U-qC52kwws?em=2&AllowTyping=True&ActiveCell='SUM(V)'!J21&wdInConfigurator=True&wdInConfigurator=True" data-label="Projection PES" tabindex="0">
+      <i class="fa-solid fa-bullseye"></i><span>Projection PES</span>
+    </a>
 
-  <a href="#" data-src="https://1drv.ms/x/c/4ab693cd2bf36664/IQQxCUW8vBgtSI2Up-5bGANqASkWeVS811CSYnOy9kIj9eQ?em=2&AllowTyping=True&ActiveCell='MIS'!Y48&wdInConfigurator=True&wdInConfigurator=True" data-label="MIS Report" tabindex="0">
-    <i class="fa-solid fa-table"></i><span>MIS Report</span>
-  </a>
+    <a href="#" data-src="https://1drv.ms/x/c/4ab693cd2bf36664/IQQPanuavVGLT7XfDwEB7mzuAZ0ssOfkJHGPvPCT4XSd0HY?em=2&AllowTyping=True&ActiveCell='Print%20Sum'!E7&wdInConfigurator=True&wdInConfigurator=True" data-label="Plan vs Actual" tabindex="0">
+      <i class="fa-solid fa-chart-line"></i><span>Plan vs Actual</span>
+    </a>
 
-  <a href="#" data-src="https://1drv.ms/x/c/4ab693cd2bf36664/IQQGLpFCgYZ0Rr9LyycEnL6-AWQ6CbO6xj2g_3BICdvAUlU?em=2&AllowTyping=True&ActiveCell='Summary'!B1&wdInConfigurator=True&wdInConfigurator=True" data-label="Jit Call Performance" tabindex="0">
-    <i class="fa-solid fa-tools"></i><span>Jit Call Performance</span>
-  </a>
+    <a href="#" data-src="https://1drv.ms/x/c/468679d4cdf834af/IQSifBWdHQFER74MF9Z0FJvTAQC4vP7s9qehVL-i7a8TKn0?em=2&AllowTyping=True&ActiveCell='MIS'!S5&wdInConfigurator=True&wdInConfigurator=True" data-label="MIS Report" tabindex="0">
+      <i class="fa-solid fa-table"></i><span>MIS Report</span>
+    </a>
 
-  <a href="#" data-src="https://7ravichandran96.github.io/ElkayemSupplyingParts/" data-label="Elkayem Parts" tabindex="0">
-    <i class="fa-solid fa-cogs"></i><span>Elkayem Parts</span>
-  </a>
+    <a href="#" data-src="https://1drv.ms/x/c/468679d4cdf834af/IQQ9k2XSrdfgT4SuUB4UrfSzATeaDLH8A97v9FhB627O7LA?em=2&AllowTyping=True&ActiveCell='Summary'!J7&wdInConfigurator=True&wdInConfigurator=True" data-label="Jit Call Performance" tabindex="0">
+      <i class="fa-solid fa-tools"></i><span>Jit Call Performance</span>
+    </a>
 
-  <button id="sidebarToggle" aria-label="Toggle sidebar" aria-pressed="false" title="Toggle sidebar">
-    <i class="fas fa-chevron-left" aria-hidden="true"></i>
-  </button>
-</nav>
+    <a href="#" data-src="https://7ravichandran96.github.io/ElkayemSupplyingParts/" data-label="Elkayem Parts" tabindex="0">
+      <i class="fa-solid fa-cogs"></i><span>Elkayem Parts</span>
+    </a>
 
+    <button id="sidebarToggle" aria-label="Toggle sidebar" aria-pressed="false" title="Toggle sidebar">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+  </nav>
 
   <div class="main-content" id="mainContent">
     <header class="page-header" role="banner">
@@ -235,7 +239,7 @@
 
       <div class="iframe-viewport" id="iframeViewport">
         <div class="iframe-shell" id="iframeShell">
-          <!-- iframes inserted here -->
+          <!-- iframes inserted here (we dynamically create and cache them) -->
           <!-- resizer handle -->
           <div class="resize-handle" id="resizeHandle" title="Drag to resize (double-click to auto)"></div>
         </div>
@@ -300,8 +304,12 @@
     /****************************************************************
      * Pref helpers (localStorage fallback)
      ****************************************************************/
-    function setPref(k,v){ try{ localStorage.setItem('ek_'+k, v); }catch(e){ document.cookie = `${k}=${encodeURIComponent(v)}; path=/`; } }
-    function getPref(k){ try{ return localStorage.getItem('ek_'+k); }catch(e){ return document.cookie.split('; ').reduce((r,v)=>{ const parts=v.split('='); return parts[0].trim()===k?decodeURIComponent(parts.slice(1).join('=')):r }, '') } }
+    function setPref(k,v){ try{ localStorage.setItem('ek_'+k, v); }catch(e){ document.cookie = `ek_${k}=${encodeURIComponent(v)}; path=/`; } }
+    function getPref(k){
+      try{ return localStorage.getItem('ek_'+k); }catch(e){
+        return document.cookie.split('; ').reduce((r,v)=>{ const parts=v.split('='); return parts[0].trim()===('ek_'+k)?decodeURIComponent(parts.slice(1).join('=')):r }, '')
+      }
+    }
 
     function logDebug(msg){ const ts = new Date().toLocaleTimeString(); const line = `[${ts}] ${msg}`; console.log(line); const d = document.createElement('div'); d.textContent = line; debugBody.prepend(d); }
 
@@ -356,6 +364,9 @@
 
     /****************************************************************
      * Preload (requestIdleCallback)
+     *
+     * NOTE: preload will create hidden iframes to warm OneDrive content.
+     *       We create up to `limit` hidden frames to speed up first navigation.
      ****************************************************************/
     function preload(limit = 2){
       const urls = links.map(l=> (l.dataset.src||'').trim()).filter(Boolean);
@@ -419,6 +430,9 @@
       const f = document.createElement('iframe');
       f.src = url; f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.style.display='block'; f.classList.add('active');
 
+      // Accessibility: add title
+      try { f.title = label || getTitle(url) || 'Embedded Report'; } catch(e){}
+
       const t0 = performance.now();
       f.onload = ()=> {
         iframeLoadState.set(url,false);
@@ -450,7 +464,27 @@
     /****************************************************************
      * Refresh
      ****************************************************************/
-    function refreshCurrent(){ if(!currentUrl || !iframeMap.has(currentUrl)){ showToast('Nothing to refresh',1200); return; } showLoading(); const f = iframeMap.get(currentUrl); f.src = f.src; f.onload = ()=>{ hideLoading(); scaleViewport(); showToast('Refreshed: ' + getTitle(currentUrl)); logDebug('Refreshed '+currentUrl) }; f.onerror = ()=>{ hideLoading(); showToast('Refresh failed',1200); logDebug('Refresh failed '+currentUrl) }; }
+    function refreshCurrent(){
+      if(!currentUrl || !iframeMap.has(currentUrl)){ showToast('Nothing to refresh',1200); return; }
+      showLoading();
+      const f = iframeMap.get(currentUrl);
+      if(!f) { hideLoading(); showToast('Nothing to refresh',1200); return; }
+      // force reload by changing src (cache-busting)
+      const src = f.src;
+      // for OneDrive links, reassigning same src works in most browsers; add small cache-bust param if necessary
+      try {
+        const newSrc = src.includes('?') ? src + '&_cb=' + Date.now() : src + '?_cb=' + Date.now();
+        f.src = newSrc;
+        // still keep user-visible src pointer consistent by restoring f.src after load (we use original url in map)
+        f.onload = ()=>{ hideLoading(); scaleViewport(); showToast('Refreshed: ' + getTitle(currentUrl)); logDebug('Refreshed '+currentUrl); };
+        f.onerror = ()=>{ hideLoading(); showToast('Refresh failed',1200); logDebug('Refresh failed '+currentUrl); };
+      } catch(err){
+        // fallback: remove + recreate iframe
+        const label = getTitle(currentUrl);
+        iframeMap.delete(currentUrl);
+        showIframe(currentUrl, label);
+      }
+    }
 
     /****************************************************************
      * Sidebar behaviour + keyboard
@@ -571,12 +605,9 @@
       function onStart(clientX, clientY){
         dragging = true;
         startX = clientX; startY = clientY;
-        // measure current shell width/height in CSS pixels BEFORE transform
-        // We need to compute actual unscaled width; since we use transform: scale, compute baseWidth = offsetWidth / scale
         const computed = window.getComputedStyle(iframeShell);
         const transform = computed.transform;
         let currentScale = lastScale || 1;
-        // try parse matrix if present
         if(transform && transform !== 'none'){
           const m = transform.match(/matrix\(([^)]+)\)/);
           if(m){
@@ -592,13 +623,10 @@
         if(!dragging) return;
         const dx = clientX - startX;
         const dy = clientY - startY;
-        // new width/height in unscaled px
         const newW = Math.max(320, startW + dx);
         const newH = Math.max(240, startH + dy);
-        // set shell's CSS width/height to newW/newH (so content adjusts)
         iframeShell.style.width = newW + 'px';
         iframeShell.style.height = newH + 'px';
-        // convert width to manual scale relative to ref width
         clampManualScaleFromWidth(newW);
       }
 
@@ -660,8 +688,14 @@
     /****************************************************************
      * Actions (refresh, dark mode, debug panel)
      ****************************************************************/
-    refreshBtn.addEventListener('click', ()=> { if(!currentUrl){ showToast('Nothing to refresh'); return; } const f = iframeMap.get(currentUrl); if(!f) return; showLoading(); f.src = f.src; f.onload = ()=>{ hideLoading(); scaleViewport(); showToast('Refreshed'); logDebug('refreshed ' + currentUrl); }; f.onerror = ()=>{ hideLoading(); showToast('Refresh failed'); logDebug('refresh failed ' + currentUrl); } });
-    darkToggle.addEventListener('click', ()=> { document.body.classList.toggle('dark-mode'); const dm = document.body.classList.contains('dark-mode') ? '1':'0'; setPref('darkMode', dm); showToast(document.body.classList.contains('dark-mode') ? 'Dark mode' : 'Light mode'); logDebug('dark mode ' + dm); });
+    refreshBtn.addEventListener('click', ()=> { refreshCurrent(); });
+    darkToggle.addEventListener('click', ()=> {
+      document.body.classList.toggle('dark-mode');
+      const dm = document.body.classList.contains('dark-mode') ? '1':'0';
+      setPref('darkMode', dm);
+      showToast(document.body.classList.contains('dark-mode') ? 'Dark mode' : 'Light mode');
+      logDebug('dark mode ' + dm);
+    });
 
     debugToggle.addEventListener('click', ()=> { debugPanel.classList.toggle('open'); debugPanel.setAttribute('aria-hidden', !debugPanel.classList.contains('open')); });
     debugClear.addEventListener('click', ()=> { debugBody.innerHTML=''; });
@@ -692,7 +726,7 @@
         }
       }
 
-      // preload
+      // preload some frames (hidden) to speed first open
       preload(2);
 
       // initial load (last or first)
@@ -704,9 +738,6 @@
       setTimeout(scaleViewport, 300);
       logDebug('init completed');
     }
-
-    // nav link handlers (defined earlier in code flow but ensure ready)
-    // already assigned above when iterating links earlier (preserved)
 
     // observe iframeShell changes to rescale
     const observer = new MutationObserver(debounce(()=> scaleViewport(), 120));
